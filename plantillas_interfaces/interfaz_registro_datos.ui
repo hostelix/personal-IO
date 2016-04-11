@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DialogoRegistroDatos</class>
+ <widget class="QDialog" name="DialogoRegistroDatos">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>684</width>
+    <height>481</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="toolTip">
+   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Datos Personales</string>
+     </property>
+     <widget class="QLineEdit" name="input_primer_nombre">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>141</width>
+        <height>29</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_primer_nombre">
+      <property name="geometry">
+       <rect>
+        <x>14</x>
+        <y>30</y>
+        <width>111</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Primer Nombre</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_segundo_nombre">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>30</y>
+        <width>111</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Segundo Nombre</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="input_segundo_nombre">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>50</y>
+        <width>141</width>
+        <height>29</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="input_primer_apellido">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>50</y>
+        <width>141</width>
+        <height>29</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="input_segundo_apellido">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>50</y>
+        <width>141</width>
+        <height>29</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_primer_apellido">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>30</y>
+        <width>111</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Primer Apellido</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_segundo_apellido">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>30</y>
+        <width>111</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Segundo Apellido</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="input_cedula">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>141</width>
+        <height>29</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_cedula">
+      <property name="geometry">
+       <rect>
+        <x>14</x>
+        <y>100</y>
+        <width>111</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cedula</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="select_sexo">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>119</y>
+        <width>131</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>Masculino</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Femenino</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_cedula_2">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>100</y>
+        <width>111</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Sexo</string>
+      </property>
+     </widget>
+     <widget class="Line" name="line">
+      <property name="geometry">
+       <rect>
+        <x>7</x>
+        <y>170</y>
+        <width>631</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>190</y>
+        <width>631</width>
+        <height>211</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Datos Extra</string>
+      </property>
+      <widget class="QLineEdit" name="input_email">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>151</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_email">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>121</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Correo Electronico</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_cargo">
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>29</y>
+         <width>59</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cargo</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="select_cargos">
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>50</y>
+         <width>181</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="select_nivel_instruccion">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>50</y>
+         <width>181</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>Educación Preescolar</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Educación Básica</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Educación Media Diversificada y Profesional</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Educación Superior</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="label_nivel_instruccion">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>30</y>
+         <width>131</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Nivel de Instruccion</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QDialogButtonBox" name="acciones_registro">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>acciones_registro</sender>
+   <signal>accepted()</signal>
+   <receiver>DialogoRegistroDatos</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>247</x>
+     <y>442</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>acciones_registro</sender>
+   <signal>rejected()</signal>
+   <receiver>DialogoRegistroDatos</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>315</x>
+     <y>442</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
