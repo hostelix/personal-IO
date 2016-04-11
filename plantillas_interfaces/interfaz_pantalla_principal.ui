@@ -6,24 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>640</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Control Asistencia</string>
   </property>
   <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menu_principal">
+  <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>640</width>
      <height>23</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu_archivo">
+   <widget class="QMenu" name="menu_salir">
     <property name="title">
      <string>&amp;Archivo</string>
     </property>
@@ -33,19 +33,11 @@
     <property name="title">
      <string>&amp;Registro</string>
     </property>
-    <addaction name="action_registrar_docentes"/>
-    <addaction name="action_registrar_obreros"/>
-    <addaction name="action_registrar_administrador"/>
+    <addaction name="action_registrar_personal"/>
+    <addaction name="action_registrar_adminitrador"/>
    </widget>
-   <widget class="QMenu" name="menu_ayuda">
-    <property name="title">
-     <string>&amp;Ayuda</string>
-    </property>
-    <addaction name="action_Ayuda"/>
-   </widget>
-   <addaction name="menu_archivo"/>
+   <addaction name="menu_salir"/>
    <addaction name="menu_registro"/>
-   <addaction name="menu_ayuda"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_salir">
@@ -53,24 +45,14 @@
     <string>&amp;Salir</string>
    </property>
   </action>
-  <action name="action_registrar_docentes">
+  <action name="action_registrar_personal">
    <property name="text">
-    <string>&amp;Registrar Docentes</string>
+    <string>&amp;Registrar Personal</string>
    </property>
   </action>
-  <action name="action_registrar_obreros">
+  <action name="action_registrar_adminitrador">
    <property name="text">
-    <string>&amp;Registrar Obreros</string>
-   </property>
-  </action>
-  <action name="action_registrar_administrador">
-   <property name="text">
-    <string>&amp;Registrar Administrador</string>
-   </property>
-  </action>
-  <action name="action_Ayuda">
-   <property name="text">
-    <string>&amp;Ayuda</string>
+    <string>&amp;Registrar Adminitrador</string>
    </property>
   </action>
  </widget>
