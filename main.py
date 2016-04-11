@@ -14,6 +14,10 @@ class VentanaPrincipal(QtGui.QMainWindow):
 		QtCore.QObject.connect(self.ui.action_registrar_personal, QtCore.SIGNAL("triggered()"),self.abrir_dialogo_registro_personal)
 
 	def salir_app(self):
+		msgBox = QtGui.QMessageBox()
+		msgBox.setWindowTitle("Mensaje de alerta")
+		msgBox.setText("Se va a cerrar la aplicacion")
+		msgBox.exec_()
 		exit()
 
 	def abrir_dialogo_registro_personal(self):
