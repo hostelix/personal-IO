@@ -1,6 +1,5 @@
 #! /usr/bin/python
 import sys
-from PyQt4 import QtCore, QtGui
 from interfaces.dialogo_registro_datos import *
 from interfaces.pantalla_principal import *
 
