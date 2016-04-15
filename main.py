@@ -1,7 +1,9 @@
 #! /usr/bin/python
 import sys
+
 from interfaces.dialogo_registro_datos import *
 from interfaces.pantalla_principal import *
+from libs.lib_app import App
 
 
 class VentanaPrincipal(QtGui.QMainWindow):
@@ -22,7 +24,7 @@ class VentanaPrincipal(QtGui.QMainWindow):
         exit()
 
     def abrir_dialogo_registro_personal(self):
-        Registro_personal = DialogoRegistroDatos().exec_()
+        DialogoRegistroDatos().exec_()
 
 
 class DialogoRegistroDatos(QtGui.QDialog):
@@ -31,10 +33,32 @@ class DialogoRegistroDatos(QtGui.QDialog):
         self.ui = Ui_DialogoRegistroDatos()
         self.ui.setupUi(self)
 
-        # QtCore.QObject.connect(self.ui.action_salir, QtCore.SIGNAL("triggered()"),self.cerrar_dialogo)
+        # Limpiamos los selects
+        self.ui.select_nivel_instruccion.clear()
+        self.ui.select_cargos.clear()
+
+        # Cargamos los datos en los selects
+        # self.ui.select_nivel_instruccion.addItems(niveles)
+        # self.ui.select_cargos.addItems(cargos)
+
+        # Conectamos los botones con sus funciones para realizar acciones
+        QtCore.QObject.connect(self.ui.btn_cerrar, QtCore.SIGNAL("clicked()"), self.cerrar_dialogo)
+        QtCore.QObject.connect(self.ui.btn_registrar, QtCore.SIGNAL("clicked()"), self.procesar_registro)
+
+    def procesar_registro(self):
+        datos = {
+            'primer_nombre': str(self.ui.input_primer_nombre.text()),
+            'segundo_nombre': str(self.ui.input_segundo_nombre.text()),
+            'primer_apellido': str(self.ui.input_primer_apellido.text()),
+            'segundo_apellido': str(self.ui.input_segundo_apellido.text()),
+            'cedula': str(self.ui.input_cedula.text()),
+            'email': str(self.ui.input_email.text())
+        }
+
+        print datos
 
     def cerrar_dialogo(self):
-        exit()
+        self.close()
 
 
 if __name__ == '__main__':
