@@ -4,6 +4,7 @@ import sys
 from interfaces.dialogo_registro_datos import *
 from interfaces.pantalla_principal import *
 from libs.lib_app import App
+from libs.lib_extras import *
 
 
 class VentanaPrincipal(QtGui.QMainWindow):
@@ -17,11 +18,8 @@ class VentanaPrincipal(QtGui.QMainWindow):
                                self.abrir_dialogo_registro_personal)
 
     def salir_app(self):
-        msgBox = QtGui.QMessageBox()
-        msgBox.setWindowTitle("Mensaje de alerta")
-        msgBox.setText("Se va a cerrar la aplicacion")
-        msgBox.exec_()
-        exit()
+        if confirmar_salida_app(self):
+            exit()
 
     def abrir_dialogo_registro_personal(self):
         DialogoRegistroDatos().exec_()
@@ -62,9 +60,17 @@ class DialogoRegistroDatos(QtGui.QDialog):
 
 
 if __name__ == '__main__':
-    app = QtGui.QApplication(sys.argv)
-    main = VentanaPrincipal()
+    aplicacion = QtGui.QApplication(sys.argv)
 
-    main.show()
+    # Para traducir los textos default en la libreria al lenguaje del equipo
+    translator = QtCore.QTranslator(aplicacion)
+    locale = QtCore.QLocale.system().name()
+    path = QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.TranslationsPath)
+    translator.load('qt_%s' % locale, path)
+    aplicacion.installTranslator(translator)
 
-    sys.exit(app.exec_())
+    ventana_main = VentanaPrincipal()
+
+    ventana_main.show()
+
+    sys.exit(aplicacion.exec_())
