@@ -190,22 +190,6 @@
     </property>
    </widget>
   </widget>
-  <widget class="QDialogButtonBox" name="acciones_registro">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>340</y>
-     <width>201</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
   <widget class="QGroupBox" name="gurpo_datos_extras">
    <property name="geometry">
     <rect>
@@ -223,7 +207,7 @@
      <rect>
       <x>10</x>
       <y>50</y>
-      <width>151</width>
+      <width>181</width>
       <height>31</height>
      </rect>
     </property>
@@ -244,7 +228,7 @@
    <widget class="QLabel" name="label_cargo">
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>410</x>
       <y>29</y>
       <width>59</width>
       <height>17</height>
@@ -257,7 +241,7 @@
    <widget class="QComboBox" name="select_cargos">
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>410</x>
       <y>50</y>
       <width>181</width>
       <height>31</height>
@@ -267,7 +251,7 @@
    <widget class="QComboBox" name="select_nivel_instruccion">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>210</x>
       <y>50</y>
       <width>181</width>
       <height>31</height>
@@ -277,7 +261,7 @@
    <widget class="QLabel" name="label_nivel_instruccion">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>210</x>
       <y>30</y>
       <width>131</width>
       <height>17</height>
@@ -288,40 +272,33 @@
     </property>
    </widget>
   </widget>
+  <widget class="QPushButton" name="btn_registrar">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>350</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&amp;Registrar</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_cerrar">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>350</y>
+     <width>111</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&amp;Cerrar</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>acciones_registro</sender>
-   <signal>accepted()</signal>
-   <receiver>DialogoRegistroDatos</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>247</x>
-     <y>442</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>acciones_registro</sender>
-   <signal>rejected()</signal>
-   <receiver>DialogoRegistroDatos</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>315</x>
-     <y>442</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
