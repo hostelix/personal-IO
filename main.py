@@ -24,6 +24,13 @@ class VentanaPrincipal(QtGui.QMainWindow):
     def abrir_dialogo_registro_personal(self):
         DialogoRegistroDatos().exec_()
 
+    def centrar_ventana(self):
+        frameGm = self.frameGeometry()
+        screen = QtGui.QApplication.desktop().screenNumber(QtGui.QApplication.desktop().cursor().pos())
+        centerPoint = QtGui.QApplication.desktop().screenGeometry(screen).center()
+        frameGm.moveCenter(centerPoint)
+        self.move(frameGm.topLeft())
+
 
 class DialogoRegistroDatos(QtGui.QDialog):
     def __init__(self, parent=None):
@@ -71,6 +78,7 @@ if __name__ == '__main__':
 
     ventana_main = VentanaPrincipal()
 
+    ventana_main.centrar_ventana()
     ventana_main.show()
 
     sys.exit(aplicacion.exec_())
