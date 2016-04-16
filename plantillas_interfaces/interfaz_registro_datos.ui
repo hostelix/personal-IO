@@ -37,6 +37,9 @@
       <height>29</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;</string>
+    </property>
    </widget>
    <widget class="QLabel" name="label_primer_nombre">
     <property name="geometry">
@@ -73,6 +76,9 @@
       <height>29</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="input_primer_apellido">
     <property name="geometry">
@@ -83,6 +89,9 @@
       <height>29</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="input_segundo_apellido">
     <property name="geometry">
@@ -92,6 +101,9 @@
       <width>141</width>
       <height>29</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_primer_apellido">
@@ -128,6 +140,9 @@
       <width>141</width>
       <height>29</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_cedula">
@@ -210,6 +225,12 @@
       <width>181</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: white;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_email">
