@@ -4,7 +4,7 @@ import sqlite3 as dblite
 from libs import paths
 
 
-class DataBaseApp:
+class PersonalIOdb:
     def __init__(self):
         self.conexion = dblite.connect(paths.PATH_DB)
         self.cursor = self.conexion.cursor()
