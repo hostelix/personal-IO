@@ -1,6 +1,6 @@
 
 CREATE TABLE personal (
-   id INT PRIMARY KEY NOT NULL,
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
    primer_nombre CHAR(15),
    segundo_nombre CHAR(15),
    primer_apellido CHAR(15),
