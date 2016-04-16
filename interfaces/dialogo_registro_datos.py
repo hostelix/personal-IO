@@ -68,8 +68,6 @@ class Ui_DialogoRegistroDatos(object):
         self.select_sexo = QtGui.QComboBox(self.grupo_datos_personales)
         self.select_sexo.setGeometry(QtCore.QRect(170, 119, 131, 31))
         self.select_sexo.setObjectName(_fromUtf8("select_sexo"))
-        self.select_sexo.addItem(_fromUtf8(""))
-        self.select_sexo.addItem(_fromUtf8(""))
         self.label_sexo = QtGui.QLabel(self.grupo_datos_personales)
         self.label_sexo.setGeometry(QtCore.QRect(170, 100, 111, 17))
         self.label_sexo.setObjectName(_fromUtf8("label_sexo"))
@@ -118,8 +116,6 @@ class Ui_DialogoRegistroDatos(object):
         self.label_primer_apellido.setText(_translate("DialogoRegistroDatos", "Primer Apellido", None))
         self.label_segundo_apellido.setText(_translate("DialogoRegistroDatos", "Segundo Apellido", None))
         self.label_cedula.setText(_translate("DialogoRegistroDatos", "Cedula", None))
-        self.select_sexo.setItemText(0, _translate("DialogoRegistroDatos", "Masculino", None))
-        self.select_sexo.setItemText(1, _translate("DialogoRegistroDatos", "Femenino", None))
         self.label_sexo.setText(_translate("DialogoRegistroDatos", "Sexo", None))
         self.gurpo_datos_extras.setTitle(_translate("DialogoRegistroDatos", "Datos Extra", None))
         self.input_email.setWhatsThis(

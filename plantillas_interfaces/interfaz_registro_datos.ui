@@ -167,16 +167,6 @@
       <height>31</height>
      </rect>
     </property>
-    <item>
-     <property name="text">
-      <string>Masculino</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Femenino</string>
-     </property>
-    </item>
    </widget>
    <widget class="QLabel" name="label_sexo">
     <property name="geometry">
