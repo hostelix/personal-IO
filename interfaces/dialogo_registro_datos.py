@@ -66,7 +66,7 @@ class Ui_DialogoRegistroDatos(object):
         self.label_cedula.setGeometry(QtCore.QRect(14, 100, 111, 17))
         self.label_cedula.setObjectName(_fromUtf8("label_cedula"))
         self.select_sexo = QtGui.QComboBox(self.grupo_datos_personales)
-        self.select_sexo.setGeometry(QtCore.QRect(170, 119, 131, 31))
+        self.select_sexo.setGeometry(QtCore.QRect(170, 119, 141, 31))
         self.select_sexo.setObjectName(_fromUtf8("select_sexo"))
         self.label_sexo = QtGui.QLabel(self.grupo_datos_personales)
         self.label_sexo.setGeometry(QtCore.QRect(170, 100, 111, 17))
