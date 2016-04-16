@@ -15,6 +15,10 @@ class PersonalIOdb:
     def cerrar_cursor(self):
         self.cursor.close()
 
+    def cerrar(self):
+        self.cerrar_cursor()
+        self.cerrar_conexion()
+
     def get_data_select(self, nombre_tabla):
         resultado = self.cursor.execute("SELECT descripcion FROM %s" % (nombre_tabla)).fetchall()
 
