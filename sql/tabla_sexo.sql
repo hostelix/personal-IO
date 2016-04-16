@@ -4,5 +4,5 @@ CREATE TABLE sexos (
    descripcion CHAR(20)
 );
 
-INSERT INTO niveles_instruccion (id, descripcion) VALUES (1, 'Masculino');
-INSERT INTO niveles_instruccion (id, descripcion) VALUES (2, 'Femenino');
+INSERT INTO sexos (id, descripcion) VALUES (1, 'Masculino');
+INSERT INTO sexos (id, descripcion) VALUES (2, 'Femenino');
