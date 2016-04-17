@@ -4,6 +4,9 @@ import threading
 
 CARPETA_ICONOS_SVG = "svg"
 
+
+#Clase que maneja un hilo que se encarga de convertir el svg a png por medio del programa inkscape
+
 class HiloConvertirIcono(threading.Thread):
     def __init__(self, **kwargs):
         threading.Thread.__init__(self)
@@ -26,6 +29,8 @@ class HiloConvertirIcono(threading.Thread):
 			
 			subprocess.call(lista_comando)
 
+
+# Lista de tamaños que se quiere convertir
 
 lista_tamanos = ['16','32','64']
 
