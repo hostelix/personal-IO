@@ -1,6 +1,8 @@
 #! /usr/bin/python
 
-from os import path
+from os import path, getcwd
+
+PATH_APP = getcwd()
 
 NOMBRE_DB_APP = "personal_io.db"
 
@@ -10,13 +12,15 @@ CARPETA_PERSONAL_USER = path.expanduser("~")
 
 CARPETA_APP = ".personal_io"
 
-CARPETA_RECURSOS = "recursos"
+CARPETA_RECURSOS = path.join(PATH_APP, "recursos")
 
 CARPETA_ICONOS = path.join(CARPETA_RECURSOS, "iconos")
 
 CARPETA_ICONOS_16_x_16 = path.join(CARPETA_ICONOS, "16x16")
 CARPETA_ICONOS_32_x_32 = path.join(CARPETA_ICONOS, "32x32")
 CARPETA_ICONOS_64_x_64 = path.join(CARPETA_ICONOS, "64x64")
+
+CARPETA_ARCHIVOS_SQL = path.join(PATH_APP, "sql")
 
 PATH_CARPETA_APP = path.join(CARPETA_PERSONAL_USER, CARPETA_APP)
 
