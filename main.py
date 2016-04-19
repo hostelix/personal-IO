@@ -123,11 +123,7 @@ if __name__ == '__main__':
     aplicacion = QtGui.QApplication(sys.argv)
 
     # Para traducir los textos default en la libreria al lenguaje del equipo
-    translator = QtCore.QTranslator(aplicacion)
-    locale = QtCore.QLocale.system().name()
-    path = QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.TranslationsPath)
-    translator.load('qt_%s' % locale, path)
-    aplicacion.installTranslator(translator)
+    traducir_aplicacion(aplicacion)
 
     ventana_main = VentanaPrincipal()
 

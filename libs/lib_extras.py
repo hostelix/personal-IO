@@ -16,3 +16,11 @@ def setear_icono_app(_self):
 def guardar_configuracion(self):
     settings = QtCore.QSettings(paths.PATH_ARCHIVO_CONFIG, QtCore.QSettings.NativeFormat)
     settings.setValue('text', 'algo')
+
+
+def traducir_aplicacion(_aplicacion):
+    translator = QtCore.QTranslator(_aplicacion)
+    locale = QtCore.QLocale.system().name()
+    path = QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.TranslationsPath)
+    translator.load('qt_%s' % locale, path)
+    _aplicacion.installTranslator(translator)
