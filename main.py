@@ -55,8 +55,8 @@ class DialogoRegistroDatos(QtGui.QDialog):
 
         # Cargamos los datos en los selects
 
-        self.ui.select_nivel_instruccion.addItems(['algo %s' % n for n in range(0, 6)])
-        self.ui.select_cargos.addItems(['algo %s' % n for n in range(0, 6)])
+        self.ui.select_nivel_instruccion.addItems(self.personal_io_db.get_data_select('niveles_instruccion'))
+        self.ui.select_cargos.addItems(self.personal_io_db.get_data_select('cargos'))
 
         # Conectamos los botones con sus funciones para realizar acciones
         QtCore.QObject.connect(self.ui.btn_cerrar, QtCore.SIGNAL("clicked()"), self.cerrar_dialogo)
