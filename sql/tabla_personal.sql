@@ -1,5 +1,5 @@
 
-CREATE TABLE personal (
+CREATE TABLE IF NOT EXISTS personal (
    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
    primer_nombre CHAR(15),
    segundo_nombre CHAR(15),

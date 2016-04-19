@@ -1,5 +1,5 @@
 
-CREATE TABLE sexos (
+CREATE TABLE IF NOT EXISTS sexos (
    id INT PRIMARY KEY NOT NULL,
    descripcion CHAR(20)
 );

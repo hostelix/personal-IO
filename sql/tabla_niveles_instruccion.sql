@@ -1,5 +1,5 @@
 
-CREATE TABLE niveles_instruccion (
+CREATE TABLE IF NOT EXISTS niveles_instruccion (
    id INT PRIMARY KEY NOT NULL,
    descripcion CHAR(60)
 );

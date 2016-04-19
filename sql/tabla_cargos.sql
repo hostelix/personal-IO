@@ -1,5 +1,5 @@
 
-CREATE TABLE cargos (
+CREATE TABLE IF NOT EXISTS cargos (
    id INT PRIMARY KEY NOT NULL,
    descripcion CHAR(60)
 );
