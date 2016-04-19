@@ -3,6 +3,7 @@ import sys
 
 from interfaces.dialogo_registro_datos import *
 from interfaces.pantalla_principal import *
+from interfaces.dialogo_registro_administrador import *
 from libs.lib_db_app import PersonalIOdb
 from libs.lib_extras import *
 from libs.paths import *
@@ -18,12 +19,14 @@ class VentanaPrincipal(QtGui.QMainWindow):
         self.personal_io_db = PersonalIOdb()
 
         # Seteamos el icono de la aplicacion
-        self.setWindowIcon(QtGui.QIcon(PATH_ICON_APP_64X64))
+        setear_icono_app(self)
 
         # Conexion de acciones con las senales
         QtCore.QObject.connect(self.ui.action_salir, QtCore.SIGNAL("triggered()"), self.salir_app)
         QtCore.QObject.connect(self.ui.action_registrar_personal, QtCore.SIGNAL("triggered()"),
                                self.abrir_dialogo_registro_personal)
+        QtCore.QObject.connect(self.ui.action_registrar_adminitrador, QtCore.SIGNAL("triggered()"),
+                               self.abrir_dialogo_registro_administrador)
 
     def salir_app(self):
         if confirmar_salida_app(self):
@@ -32,6 +35,9 @@ class VentanaPrincipal(QtGui.QMainWindow):
 
     def abrir_dialogo_registro_personal(self):
         DialogoRegistroDatos(self.personal_io_db).exec_()
+
+    def abrir_dialogo_registro_administrador(self):
+        DialogoRegistroDatosAdministrador(self.personal_io_db).exec_()
 
     def centrar_ventana(self):
         frameGm = self.frameGeometry()
@@ -48,6 +54,9 @@ class DialogoRegistroDatos(QtGui.QDialog):
         self.ui.setupUi(self)
 
         self.personal_io_db = base_de_datos
+
+        # Seteamos el icono de la aplicacion
+        setear_icono_app(self)
 
         # Limpiamos los selects
         self.ui.select_nivel_instruccion.clear()
@@ -73,6 +82,33 @@ class DialogoRegistroDatos(QtGui.QDialog):
             'id_nivel_instruccion': int(self.ui.select_nivel_instruccion.currentIndex() + 1),
             'id_cargo': int(self.ui.select_cargos.currentIndex() + 1),
             'id_sexo': int(self.ui.select_sexo.currentIndex() + 1)
+        }
+
+        print datos
+
+        self.personal_io_db.registrar_persona(datos)
+
+    def cerrar_dialogo(self):
+        self.close()
+
+
+class DialogoRegistroDatosAdministrador(QtGui.QDialog):
+    def __init__(self, base_de_datos, parent=None):
+        QtGui.QWidget.__init__(self, parent)
+        self.ui = Ui_DialogoRegistroDatosAdministrador()
+        self.ui.setupUi(self)
+
+        # Seteamos el icono de la aplicacion
+        setear_icono_app(self)
+
+        self.personal_io_db = base_de_datos
+
+        # Conectamos los botones con sus funciones para realizar acciones
+        QtCore.QObject.connect(self.ui.btn_cerrar, QtCore.SIGNAL("clicked()"), self.cerrar_dialogo)
+        QtCore.QObject.connect(self.ui.btn_registrar, QtCore.SIGNAL("clicked()"), self.procesar_registro)
+
+    def procesar_registro(self):
+        datos = {
         }
 
         print datos
