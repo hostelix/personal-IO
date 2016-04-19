@@ -2,6 +2,7 @@
 
 import sqlite3 as dblite
 from libs import paths
+import os
 
 
 class PersonalIOdb:
@@ -23,6 +24,22 @@ class PersonalIOdb:
         resultado = self.cursor.execute("SELECT descripcion FROM %s" % (nombre_tabla)).fetchall()
 
         return ["%s" % elemento[0] for elemento in resultado]
+
+    def crear_tablas(self):
+        lista_archivos_sql = os.listdir(paths.CARPETA_ARCHIVOS_SQL)
+
+        for archivo in lista_archivos_sql:
+
+            ruta_archivo = os.path.join(paths.CARPETA_ARCHIVOS_SQL, archivo)
+            sql = open(ruta_archivo).read()
+            try:
+                self.cursor.executescript(sql)
+
+            except dblite.Error, e:
+                if self.conexion:
+                    self.conexion.rollback()
+
+                print "Error %s:" % e.args[0]
 
     def registrar_persona(self, datos):
         try:
