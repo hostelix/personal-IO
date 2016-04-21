@@ -72,3 +72,19 @@ class PersonalIOdb:
                 self.conexion.rollback()
 
             print "Error %s:" % e.args[0]
+
+    def autenticar_administrador(self, datos):
+        try:
+            self.cursor.execute("""
+               SELECT count(*) FROM administradores
+               WHERE usuario = '%s' AND password = '%s' LIMIT 1""" % (datos['usuario'], datos['password']))
+
+            resultado = self.cursor.fetchone()
+
+            return bool(resultado[0])
+
+        except dblite.Error, e:
+            if self.conexion:
+                self.conexion.rollback()
+
+            print "Error %s:" % e.args[0]
