@@ -5,4 +5,4 @@ CREATE TABLE IF NOT EXISTS administradores (
    email CHAR(30)
 );
 
-INSERT INTO administradores (usuario, password, email) VALUES ('admin', 'admin', 'admin@gmail.com');
+INSERT INTO administradores (id,usuario, password, email) VALUES (1,'admin', 'admin', 'admin@gmail.com');
