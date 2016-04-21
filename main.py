@@ -34,10 +34,12 @@ class VentanaPrincipal(QtGui.QMainWindow):
             exit()
 
     def abrir_dialogo_registro_personal(self):
-        DialogoRegistroDatos(self.personal_io_db).exec_()
+        if verificar_is_admin(self.personal_io_db):
+            DialogoRegistroDatos(self.personal_io_db).exec_()
 
     def abrir_dialogo_registro_administrador(self):
-        DialogoRegistroDatosAdministrador(self.personal_io_db).exec_()
+        if verificar_is_admin(self.personal_io_db):
+            DialogoRegistroDatosAdministrador(self.personal_io_db).exec_()
 
     def centrar_ventana(self):
         frameGm = self.frameGeometry()
