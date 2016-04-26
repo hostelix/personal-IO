@@ -21,6 +21,8 @@ class VentanaPrincipal(QtGui.QMainWindow):
         # Seteamos el icono de la aplicacion
         setear_icono_app(self)
 
+        # self.personal_io_db.crear_tablas()
+
         # Conexion de acciones con las senales
         QtCore.QObject.connect(self.ui.action_salir, QtCore.SIGNAL("triggered()"), self.salir_app)
         QtCore.QObject.connect(self.ui.action_registrar_personal, QtCore.SIGNAL("triggered()"),
@@ -68,6 +70,7 @@ class DialogoRegistroDatos(QtGui.QDialog):
 
         self.ui.select_nivel_instruccion.addItems(self.personal_io_db.get_data_select('niveles_instruccion'))
         self.ui.select_cargos.addItems(self.personal_io_db.get_data_select('cargos'))
+        self.ui.select_sexo.addItems(('Masculino', 'Femenino'))
 
         # Conectamos los botones con sus funciones para realizar acciones
         QtCore.QObject.connect(self.ui.btn_cerrar, QtCore.SIGNAL("clicked()"), self.cerrar_dialogo)
@@ -105,17 +108,30 @@ class DialogoRegistroDatosAdministrador(QtGui.QDialog):
 
         self.personal_io_db = base_de_datos
 
+        self.ui.input_password.setEchoMode(QtGui.QLineEdit.Password)
+        self.ui.input_repassword.setEchoMode(QtGui.QLineEdit.Password)
+
         # Conectamos los botones con sus funciones para realizar acciones
         QtCore.QObject.connect(self.ui.btn_cerrar, QtCore.SIGNAL("clicked()"), self.cerrar_dialogo)
         QtCore.QObject.connect(self.ui.btn_registrar, QtCore.SIGNAL("clicked()"), self.procesar_registro)
 
     def procesar_registro(self):
         datos = {
+            'usuario': str(self.ui.input_usuario.text()),
+            'email': str(self.ui.input_email.text()),
+            'password': str(self.ui.input_password.text()),
+            'repassword': str(self.ui.input_repassword.text())
         }
 
-        print datos
+        if validar_campos_vacios(datos, ['usuario', 'email', 'password', 'repassword']) == False:
+            QtGui.QMessageBox.warning(self, "Error en Formulario", "Tienes que llenar todos los campos")
+        else:
+            if (datos['password'] != datos['repassword']):
+                QtGui.QMessageBox.warning(self, "Error en Formulario", "Las contrasenas no coinciden")
+            else:
+                datos['password'] = encriptar_password(datos['password'])
+                self.personal_io_db.registrar_administrador(datos)
 
-        self.personal_io_db.registrar_persona(datos)
 
     def cerrar_dialogo(self):
         self.close()
