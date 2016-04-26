@@ -1,6 +1,6 @@
 from libs import paths
 from interfaces.dialogo_verificar_usuario import *
-
+from hashlib import md5
 
 def confirmar_salida_app(_self):
     respuesta = QtGui.QMessageBox.question(_self, 'Confirmar la salida',
@@ -9,6 +9,20 @@ def confirmar_salida_app(_self):
 
     return respuesta == QtGui.QMessageBox.Yes
 
+
+def validar_campos_vacios(diccionario_datos, lista_keys):
+    for key in lista_keys:
+        if type(diccionario_datos[key]) == str:
+            if len(diccionario_datos[key].strip()) == 0:
+                return False
+
+    return True
+
+
+def encriptar_password(string_password):
+    tmp = md5()
+    tmp.update(string_password.encode('UTF-8'))
+    return tmp.hexdigest()
 
 def setear_icono_app(_self):
     _self.setWindowIcon(QtGui.QIcon(paths.PATH_ICON_APP_64X64))
@@ -43,6 +57,9 @@ class DialogoVerificarUsuario(QtGui.QDialog):
 
         self.personal_io_db = base_de_datos
 
+        self.ui.input_password.setEchoMode(QtGui.QLineEdit.Password)
+        self.ui.input_usuario.setFocus()
+
         QtCore.QObject.connect(self.ui.btn_verificar, QtCore.SIGNAL("clicked()"),
                                self.verificar_credenciales)
 
@@ -54,7 +71,6 @@ class DialogoVerificarUsuario(QtGui.QDialog):
 
         existe_admin = self.personal_io_db.autenticar_administrador(datos)
 
-        # if 'hostelix' == datos['usuario'] and 'canaima' == datos['password']:
         if existe_admin:
             print "Acceso concedido"
             self.close()
