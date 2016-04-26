@@ -4,6 +4,6 @@ CREATE TABLE IF NOT EXISTS cargos (
    descripcion CHAR(60)
 );
 
-INSERT INTO niveles_instruccion (id, descripcion) VALUES (1, 'Docente');
-INSERT INTO niveles_instruccion (id, descripcion) VALUES (2, 'Obrero');
-INSERT INTO niveles_instruccion (id, descripcion) VALUES (3, 'Otros');
+INSERT INTO cargos (id, descripcion) VALUES (1, 'Docente');
+INSERT INTO cargos (id, descripcion) VALUES (2, 'Obrero');
+INSERT INTO cargos (id, descripcion) VALUES (3, 'Otros');
