@@ -89,9 +89,18 @@ class DialogoRegistroDatos(QtGui.QDialog):
             'id_sexo': int(self.ui.select_sexo.currentIndex() + 1)
         }
 
-        print datos
+        if validar_campos_vacios(datos, ['primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido',
+                                         'cedula']) == False:
+            QtGui.QMessageBox.warning(self, "Error en Formulario", "Tienes que llenar todos los campos")
+        else:
+            registro = self.personal_io_db.registrar_persona(datos)
 
-        self.personal_io_db.registrar_persona(datos)
+            if registro:
+                QtGui.QMessageBox.information(self, "Registro Personal", "Personal Registrado con exito")
+                self.close()
+            else:
+                QtGui.QMessageBox.critical(self, "Error en Formulario",
+                                           "Ha ocurrido un error al registrar el formulario")
 
     def cerrar_dialogo(self):
         self.close()
@@ -130,8 +139,14 @@ class DialogoRegistroDatosAdministrador(QtGui.QDialog):
                 QtGui.QMessageBox.warning(self, "Error en Formulario", "Las contrasenas no coinciden")
             else:
                 datos['password'] = encriptar_password(datos['password'])
-                self.personal_io_db.registrar_administrador(datos)
+                registro = self.personal_io_db.registrar_administrador(datos)
 
+                if registro:
+                    QtGui.QMessageBox.information(self, "Registro Administrador", "Administrador creado con exito")
+                    self.close()
+                else:
+                    QtGui.QMessageBox.critical(self, "Error en Formulario",
+                                               "Ha ocurrido un error al registrar el administrador")
 
     def cerrar_dialogo(self):
         self.close()
