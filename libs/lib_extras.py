@@ -18,7 +18,6 @@ def validar_campos_vacios(diccionario_datos, lista_keys):
 
     return True
 
-
 def encriptar_password(string_password):
     tmp = md5()
     tmp.update(string_password.encode('UTF-8'))

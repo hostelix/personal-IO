@@ -3,6 +3,7 @@
 import sqlite3 as dblite
 from libs import paths
 import os
+from lib_extras import encriptar_password
 
 
 class PersonalIOdb:
@@ -55,7 +56,7 @@ class PersonalIOdb:
                     id_cargo,
                     id_nivel_instruccion
                 )
-                VALUES ( %s, %s, %s, %s, %s, %s, %d, %d, %d );""" % (
+                VALUES ( '%s', '%s', '%s', '%s', '%s', '%s', %d, %d, %d );""" % (
                 datos['primer_nombre'],
                 datos['segundo_nombre'],
                 datos['primer_apellido'],
@@ -73,11 +74,30 @@ class PersonalIOdb:
 
             print "Error %s:" % e.args[0]
 
+    def registrar_administrador(self, datos):
+
+        try:
+            self.cursor.execute("""
+                INSERT INTO administradores (
+                    usuario,
+                    email,
+                    password
+                )
+                VALUES ( :usuario, :email, :password);""", datos)
+
+            print self.conexion.commit()
+        except dblite.Error, e:
+            if self.conexion:
+                self.conexion.rollback()
+
+            print "Error %s:" % e.args[0]
+
     def autenticar_administrador(self, datos):
         try:
             self.cursor.execute("""
                SELECT count(*) FROM administradores
-               WHERE usuario = '%s' AND password = '%s' LIMIT 1""" % (datos['usuario'], datos['password']))
+               WHERE usuario = '%s' AND password = '%s' LIMIT 1""" % (
+            datos['usuario'], encriptar_password(datos['password'])))
 
             resultado = self.cursor.fetchone()
 
