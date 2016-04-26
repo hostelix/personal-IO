@@ -56,23 +56,20 @@ class PersonalIOdb:
                     id_cargo,
                     id_nivel_instruccion
                 )
-                VALUES ( '%s', '%s', '%s', '%s', '%s', '%s', %d, %d, %d );""" % (
-                datos['primer_nombre'],
-                datos['segundo_nombre'],
-                datos['primer_apellido'],
-                datos['segundo_apellido'],
-                datos['cedula'],
-                datos['email'],
-                datos['id_sexo'],
-                datos['id_cargo'],
-                datos['id_nivel_instruccion'])
-                                )
+                VALUES ( :primer_nombre, :segundo_nombre, :primer_apellido, :segundo_apellido, :cedula, :email, :id_sexo, :id_cargo, :id_nivel_instruccion);""",
+                                datos)
+
+            self.conexion.commit()
+
+            return True
 
         except dblite.Error, e:
             if self.conexion:
                 self.conexion.rollback()
 
             print "Error %s:" % e.args[0]
+
+            return False
 
     def registrar_administrador(self, datos):
 
@@ -85,11 +82,14 @@ class PersonalIOdb:
                 )
                 VALUES ( :usuario, :email, :password);""", datos)
 
-            print self.conexion.commit()
+            self.conexion.commit()
+
+            return True
         except dblite.Error, e:
             if self.conexion:
                 self.conexion.rollback()
 
+            return False
             print "Error %s:" % e.args[0]
 
     def autenticar_administrador(self, datos):
