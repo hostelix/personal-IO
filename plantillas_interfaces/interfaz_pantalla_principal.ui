@@ -41,6 +41,7 @@
      <string>&amp;Ver</string>
     </property>
     <addaction name="action_verificacion_cedula"/>
+    <addaction name="action_ver_registros_asistencia"/>
    </widget>
    <widget class="QMenu" name="menu_opciones">
     <property name="title">
@@ -71,6 +72,11 @@
   <action name="action_verificacion_cedula">
    <property name="text">
     <string>&amp;Verificacion de Cedula</string>
+   </property>
+  </action>
+  <action name="action_ver_registros_asistencia">
+   <property name="text">
+    <string>Ver Registro de Asistencia</string>
    </property>
   </action>
  </widget>
