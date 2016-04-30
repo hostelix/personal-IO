@@ -39,7 +39,7 @@ def saludo_dia_noche():
 
     if (hora >= 4 and hora < 12):
         return "Buenos Dias"
-    elif (hora >= 12 and hora <= 17):
+    elif (hora >= 12 and hora <= 18):
         return "Buenas Tardes"
     else:
         return "Buenas Noches"

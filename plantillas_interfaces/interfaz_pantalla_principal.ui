@@ -36,8 +36,21 @@
     <addaction name="action_registrar_personal"/>
     <addaction name="action_registrar_adminitrador"/>
    </widget>
+   <widget class="QMenu" name="menu_ver">
+    <property name="title">
+     <string>&amp;Ver</string>
+    </property>
+    <addaction name="action_verificacion_cedula"/>
+   </widget>
+   <widget class="QMenu" name="menu_opciones">
+    <property name="title">
+     <string>&amp;Opciones</string>
+    </property>
+   </widget>
    <addaction name="menu_salir"/>
+   <addaction name="menu_ver"/>
    <addaction name="menu_registro"/>
+   <addaction name="menu_opciones"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_salir">
@@ -53,6 +66,11 @@
   <action name="action_registrar_adminitrador">
    <property name="text">
     <string>&amp;Registrar Adminitrador</string>
+   </property>
+  </action>
+  <action name="action_verificacion_cedula">
+   <property name="text">
+    <string>&amp;Verificacion de Cedula</string>
    </property>
   </action>
  </widget>

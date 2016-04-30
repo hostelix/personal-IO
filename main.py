@@ -30,8 +30,9 @@ class VentanaPrincipal(QtGui.QMainWindow):
                                self.abrir_dialogo_registro_personal)
         QtCore.QObject.connect(self.ui.action_registrar_adminitrador, QtCore.SIGNAL("triggered()"),
                                self.abrir_dialogo_registro_administrador)
+        QtCore.QObject.connect(self.ui.action_verificacion_cedula, QtCore.SIGNAL("triggered()"),
+                               self.abrir_dialogo_verificacion_cedula)
 
-        DialogoVerificarCedula(self.personal_io_db).exec_()
 
     def salir_app(self):
         if confirmar_salida_app(self):
@@ -45,6 +46,9 @@ class VentanaPrincipal(QtGui.QMainWindow):
     def abrir_dialogo_registro_administrador(self):
         if verificar_is_admin(self.personal_io_db):
             DialogoRegistroDatosAdministrador(self.personal_io_db).exec_()
+
+    def abrir_dialogo_verificacion_cedula(self):
+        DialogoVerificarCedula(self.personal_io_db).exec_()
 
     def centrar_ventana(self):
         frameGm = self.frameGeometry()
