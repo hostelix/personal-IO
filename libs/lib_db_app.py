@@ -3,7 +3,7 @@
 import sqlite3 as dblite
 from libs import paths
 import os
-from lib_extras import encriptar_password
+from .lib_extras import encriptar_password
 
 
 class PersonalIOdb:

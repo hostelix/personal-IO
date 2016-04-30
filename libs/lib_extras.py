@@ -93,9 +93,9 @@ class DialogoVerificarUsuario(QtGui.QDialog):
         existe_admin = self.personal_io_db.autenticar_administrador(datos)
 
         if existe_admin:
-            print "Acceso concedido"
+            print("Acceso concedido")
             self.close()
             return True
         else:
-            print  "Acceso denegado"
+            print ("Acceso denegado")
             return False
