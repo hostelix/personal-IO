@@ -1,6 +1,7 @@
 from libs import paths
 from interfaces.dialogo_verificar_usuario import *
 from hashlib import md5
+from datetime import datetime
 
 def confirmar_salida_app(_self):
     respuesta = QtGui.QMessageBox.question(_self, 'Confirmar la salida',
@@ -17,6 +18,17 @@ def validar_campos_vacios(diccionario_datos, lista_keys):
                 return False
 
     return True
+
+
+def saludo_dia_noche():
+    hora = datetime.now().hour
+
+    if (hora >= 4 and hora < 12):
+        return "Buenos Dias"
+    elif (hora >= 12 and hora <= 17):
+        return "Buenas Tardes"
+    else:
+        return "Buenas Noches"
 
 def encriptar_password(string_password):
     tmp = md5()
