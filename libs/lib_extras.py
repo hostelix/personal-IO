@@ -3,6 +3,7 @@ from interfaces.dialogo_verificar_usuario import *
 from hashlib import md5
 from datetime import datetime
 
+
 def confirmar_salida_app(_self):
     respuesta = QtGui.QMessageBox.question(_self, 'Confirmar la salida',
                                            "Esta seguro que desea cerrar la aplicacion?",
@@ -20,6 +21,13 @@ def validar_campos_vacios(diccionario_datos, lista_keys):
     return True
 
 
+def obtener_hora(separador):
+    hora = str(datetime.now().hour)
+    minuto = str(datetime.now().minute)
+    segundo = str(datetime.now().second)
+
+    return "%s{0}%s{0}%s".format(separador) % (hora, minuto, segundo)
+
 def saludo_dia_noche():
     hora = datetime.now().hour
 
@@ -30,10 +38,12 @@ def saludo_dia_noche():
     else:
         return "Buenas Noches"
 
+
 def encriptar_password(string_password):
     tmp = md5()
     tmp.update(string_password.encode('UTF-8'))
     return tmp.hexdigest()
+
 
 def setear_icono_app(_self):
     _self.setWindowIcon(QtGui.QIcon(paths.PATH_ICON_APP_64X64))
