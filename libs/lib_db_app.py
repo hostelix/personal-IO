@@ -97,7 +97,7 @@ class PersonalIOdb:
             self.cursor.execute("""
                SELECT count(*) FROM administradores
                WHERE usuario = '%s' AND password = '%s' LIMIT 1""" % (
-            datos['usuario'], encriptar_password(datos['password'])))
+                datos['usuario'], encriptar_password(datos['password'])))
 
             resultado = self.cursor.fetchone()
 
@@ -108,3 +108,22 @@ class PersonalIOdb:
                 self.conexion.rollback()
 
             print "Error %s:" % e.args[0]
+
+    def buscar_personal(self, datos):
+        try:
+            self.cursor.execute("""
+            SELECT
+                cedula,
+                primer_nombre,
+                primer_apellido
+            FROM personal
+            WHERE cedula = :cedula """, datos)
+
+        except dblite.Error, e:
+            if self.conexion:
+                self.conexion.rollback()
+
+            print "Error %s:" % e.args[0]
+
+        else:
+            return self.cursor.fetchone()
