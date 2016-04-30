@@ -2,6 +2,7 @@ from libs import paths
 from interfaces.dialogo_verificar_usuario import *
 from hashlib import md5
 from datetime import datetime
+import time
 
 
 def confirmar_salida_app(_self):
@@ -22,11 +23,16 @@ def validar_campos_vacios(diccionario_datos, lista_keys):
 
 
 def obtener_hora(separador):
-    hora = str(datetime.now().hour)
-    minuto = str(datetime.now().minute)
-    segundo = str(datetime.now().second)
+    return time.strftime("%H{0}%M{0}%S".format(separador))
 
-    return "%s{0}%s{0}%s".format(separador) % (hora, minuto, segundo)
+
+def obtener_fecha(formato):
+    if formato == 'YYYY-MM-DD':
+        return time.strftime("%Y-%m-%d")
+    if formato == 'YYYY/MM/DD':
+        return time.strftime("%Y/%m/%d")
+    if formato == 'DD/MM/YYYY':
+        return time.strftime("%d/%m/%Y")
 
 def saludo_dia_noche():
     hora = datetime.now().hour
