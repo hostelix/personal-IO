@@ -36,11 +36,11 @@ class PersonalIOdb:
             try:
                 self.cursor.executescript(sql)
 
-            except dblite.Error, e:
+            except dblite.Error as err:
                 if self.conexion:
                     self.conexion.rollback()
 
-                print "Error %s:" % e.args[0]
+                print("Error %s:" % err.args[0])
 
     def registrar_persona(self, datos):
         try:
@@ -63,11 +63,11 @@ class PersonalIOdb:
 
             return True
 
-        except dblite.Error, e:
+        except dblite.Error as err:
             if self.conexion:
                 self.conexion.rollback()
 
-            print "Error %s:" % e.args[0]
+            print("Error %s:" % err.args[0])
 
             return False
 
@@ -85,12 +85,14 @@ class PersonalIOdb:
             self.conexion.commit()
 
             return True
-        except dblite.Error, e:
+
+        except dblite.Error as err:
             if self.conexion:
                 self.conexion.rollback()
 
+            print("Error %s:" % err.args[0])
+
             return False
-            print "Error %s:" % e.args[0]
 
     def autenticar_administrador(self, datos):
         try:
@@ -103,11 +105,11 @@ class PersonalIOdb:
 
             return bool(resultado[0])
 
-        except dblite.Error, e:
+        except dblite.Error as err:
             if self.conexion:
                 self.conexion.rollback()
 
-            print "Error %s:" % e.args[0]
+            print("Error %s:" % err.args[0])
 
     def buscar_personal(self, datos):
         try:
@@ -119,11 +121,11 @@ class PersonalIOdb:
             FROM personal
             WHERE cedula = :cedula """, datos)
 
-        except dblite.Error, e:
+        except dblite.Error as err:
             if self.conexion:
                 self.conexion.rollback()
 
-            print "Error %s:" % e.args[0]
+            print("Error %s:" % err.args[0])
 
         else:
             return self.cursor.fetchone()
