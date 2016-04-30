@@ -31,7 +31,7 @@ class VentanaPrincipal(QtGui.QMainWindow):
         QtCore.QObject.connect(self.ui.action_registrar_adminitrador, QtCore.SIGNAL("triggered()"),
                                self.abrir_dialogo_registro_administrador)
 
-        # DialogoVerificarCedula(self.personal_io_db).exec_()
+        DialogoVerificarCedula(self.personal_io_db).exec_()
 
     def salir_app(self):
         if confirmar_salida_app(self):
@@ -166,6 +166,8 @@ class DialogoVerificarCedula(QtGui.QDialog):
         # Seteamos el icono de la aplicacion
         setear_icono_app(self)
 
+        self.ui.input_cedula.setFocus()
+
         # Conectamos los botones con sus funciones para realizar acciones
         QtCore.QObject.connect(self.ui.btn_aceptar, QtCore.SIGNAL("clicked()"), self.procesar_accion)
 
@@ -178,7 +180,27 @@ class DialogoVerificarCedula(QtGui.QDialog):
         else:
             tamano_input = len(datos['cedula'])
             if (tamano_input >= 6 and tamano_input <= 8) and datos['cedula'].isdigit():
-                pass
+                datos_empleado = self.personal_io_db.buscar_personal(datos)
+                if datos_empleado:
+                    nombre_completo = "%s %s" % (datos_empleado[1].capitalize(), datos_empleado[2].capitalize())
+
+                    respuesta = self.personal_io_db.proceso_entrada_salida(datos)
+
+                    if respuesta['tipo'] == "completo":
+                        QtGui.QMessageBox.warning(self, "Atencion!",
+                                                  "Ya ha terminado su Turno de trabajo por el dia de hoy")
+                        self.ui.input_cedula.clear()
+                        self.close()
+                    else:
+                        saludo = "%s %s, Hora de %s: %s" % (
+                            saludo_dia_noche(), nombre_completo, respuesta['tipo'], respuesta['hora'])
+
+                        QtGui.QMessageBox.information(self, "Bienvenido", saludo)
+                        self.ui.input_cedula.clear()
+                        self.close()
+                else:
+                    QtGui.QMessageBox.warning(self, "Ha ocurrido un problema",
+                                              "Error! La cedula no existe en la base de datos")
             else:
                 QtGui.QMessageBox.warning(self, "Error en Formulario", "La cedula introducida es incorrecta")
             """registro = self.personal_io_db.registrar_persona(datos)
