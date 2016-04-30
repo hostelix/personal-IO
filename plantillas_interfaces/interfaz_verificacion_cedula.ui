@@ -11,16 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Verificacion Cedula</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#input_cedula{
-	background-color: white;
-}
-
-#label_cedula{
-	font-size: 15px;
-}</string>
+   <string notr="true">#input_cedula{background-color: white;}
+#label_cedula{font-size: 15px;}</string>
   </property>
   <widget class="QPushButton" name="btn_aceptar">
    <property name="geometry">
