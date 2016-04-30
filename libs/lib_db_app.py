@@ -3,7 +3,7 @@
 import sqlite3 as dblite
 from libs import paths
 import os
-from .lib_extras import encriptar_password
+from .lib_extras import encriptar_password, obtener_fecha, obtener_hora
 
 
 class PersonalIOdb:
@@ -129,3 +129,61 @@ class PersonalIOdb:
 
         else:
             return self.cursor.fetchone()
+
+    def proceso_entrada_salida(self, datos):
+        datos['fecha'] = obtener_fecha('YYYY-MM-DD')
+
+        retorno = {}
+
+        try:
+            self.cursor.execute("""
+            SELECT
+                id, cedula, hora_entrada, hora_salida
+            FROM entradas_salidas
+            WHERE cedula = :cedula AND fecha = :fecha """, datos)
+
+            resultado = self.cursor.fetchone()
+
+            if resultado:
+                if resultado[2] and resultado[3]:
+                    retorno['tipo'] = 'completo'
+                elif resultado[2] and resultado[3] == None:
+
+                    datos['hora_salida'] = obtener_hora(separador=':')
+
+                    self.cursor.execute("""
+                        UPDATE
+                            entradas_salidas
+                        SET
+                            hora_salida = :hora_salida
+                        WHERE cedula = :cedula AND fecha = :fecha ;""", datos)
+
+                    self.conexion.commit()
+
+                    retorno['tipo'] = "salida"
+                    retorno['hora'] = datos['hora_salida']
+
+            else:
+                datos['hora_entrada'] = obtener_hora(separador=':')
+
+                self.cursor.execute("""
+                    INSERT INTO entradas_salidas (
+                        cedula,
+                        hora_entrada,
+                        fecha
+                    )
+                    VALUES ( :cedula, :hora_entrada, :fecha);""", datos)
+
+                self.conexion.commit()
+
+                retorno['tipo'] = "entrada"
+                retorno['hora'] = datos['hora_entrada']
+
+        except dblite.Error as err:
+            if self.conexion:
+                self.conexion.rollback()
+
+            print("Error %s:" % err.args[0])
+
+        else:
+            return retorno
