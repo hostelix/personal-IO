@@ -4,6 +4,7 @@ import sys
 from interfaces.dialogo_registro_datos import *
 from interfaces.pantalla_principal import *
 from interfaces.dialogo_registro_administrador import *
+from interfaces.dialogo_verificar_cedula import *
 from libs.lib_db_app import PersonalIOdb
 from libs.lib_extras import *
 from libs.paths import *
@@ -29,6 +30,8 @@ class VentanaPrincipal(QtGui.QMainWindow):
                                self.abrir_dialogo_registro_personal)
         QtCore.QObject.connect(self.ui.action_registrar_adminitrador, QtCore.SIGNAL("triggered()"),
                                self.abrir_dialogo_registro_administrador)
+
+        # DialogoVerificarCedula(self.personal_io_db).exec_()
 
     def salir_app(self):
         if confirmar_salida_app(self):
@@ -150,6 +153,42 @@ class DialogoRegistroDatosAdministrador(QtGui.QDialog):
 
     def cerrar_dialogo(self):
         self.close()
+
+
+class DialogoVerificarCedula(QtGui.QDialog):
+    def __init__(self, base_de_datos, parent=None):
+        QtGui.QWidget.__init__(self, parent)
+        self.ui = Ui_DialogoVerificarCedula()
+        self.ui.setupUi(self)
+
+        self.personal_io_db = base_de_datos
+
+        # Seteamos el icono de la aplicacion
+        setear_icono_app(self)
+
+        # Conectamos los botones con sus funciones para realizar acciones
+        QtCore.QObject.connect(self.ui.btn_aceptar, QtCore.SIGNAL("clicked()"), self.procesar_accion)
+
+    def procesar_accion(self):
+        datos = {
+            'cedula': str(self.ui.input_cedula.text())
+        }
+        if validar_campos_vacios(datos, ['cedula']) == False:
+            QtGui.QMessageBox.warning(self, "Error en Formulario", "El campo no puede quedar vacio")
+        else:
+            tamano_input = len(datos['cedula'])
+            if (tamano_input >= 6 and tamano_input <= 8) and datos['cedula'].isdigit():
+                pass
+            else:
+                QtGui.QMessageBox.warning(self, "Error en Formulario", "La cedula introducida es incorrecta")
+            """registro = self.personal_io_db.registrar_persona(datos)
+
+            if registro:
+                QtGui.QMessageBox.information(self, "Registro Personal", "Personal Registrado con exito")
+                self.close()
+            else:
+                QtGui.QMessageBox.critical(self, "Error en Formulario",
+                                           "Ha ocurrido un error al registrar el formulario")"""
 
 
 if __name__ == '__main__':
