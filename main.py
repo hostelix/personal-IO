@@ -53,9 +53,10 @@ class VentanaPrincipal(QtGui.QMainWindow):
         DialogoVerificarCedula(self.personal_io_db).exec_()
 
     def cargar_frame_ver_registros_asistencia(self):
-        frame_registros_asistencia = FrameVerRegistros(self.personal_io_db)
+        if verificar_is_admin(self.personal_io_db):
+            frame_registros_asistencia = FrameVerRegistros(self.personal_io_db)
 
-        self.setCentralWidget(frame_registros_asistencia)
+            self.setCentralWidget(frame_registros_asistencia)
 
     def centrar_ventana(self):
         frameGm = self.frameGeometry()
