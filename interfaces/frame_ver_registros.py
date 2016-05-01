@@ -16,21 +16,18 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
-
-
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-
 class Ui_FrameVerRegistros(object):
     def setupUi(self, FrameVerRegistros):
         FrameVerRegistros.setObjectName(_fromUtf8("FrameVerRegistros"))
         FrameVerRegistros.resize(648, 449)
-        FrameVerRegistros.setFrameShape(QtGui.QFrame.StyledPanel)
-        FrameVerRegistros.setFrameShadow(QtGui.QFrame.Raised)
+        # FrameVerRegistros.setFrameShape(QtGui.QFrame.StyledPanel)
+        # FrameVerRegistros.setFrameShadow(QtGui.QFrame.Raised)
         self.horizontalLayoutWidget = QtGui.QWidget(FrameVerRegistros)
         self.horizontalLayoutWidget.setGeometry(QtCore.QRect(10, 30, 631, 51))
         self.horizontalLayoutWidget.setObjectName(_fromUtf8("horizontalLayoutWidget"))
@@ -52,11 +49,13 @@ class Ui_FrameVerRegistros(object):
         self.verticalLayoutWidget.setObjectName(_fromUtf8("verticalLayoutWidget"))
         self.verticalLayout = QtGui.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.tabla_resultados = QtGui.QTableView(self.verticalLayoutWidget)
+        self.tabla_resultados = QtGui.QTableWidget(self.verticalLayoutWidget)
         self.tabla_resultados.setObjectName(_fromUtf8("tabla_resultados"))
+        self.tabla_resultados.setColumnCount(0)
+        self.tabla_resultados.setRowCount(0)
         self.verticalLayout.addWidget(self.tabla_resultados)
         self.horizontalLayoutWidget_2 = QtGui.QWidget(FrameVerRegistros)
-        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(10, 90, 421, 31))
+        self.horizontalLayoutWidget_2.setGeometry(QtCore.QRect(10, 80, 521, 51))
         self.horizontalLayoutWidget_2.setObjectName(_fromUtf8("horizontalLayoutWidget_2"))
         self.horizontal_layout2 = QtGui.QHBoxLayout(self.horizontalLayoutWidget_2)
         self.horizontal_layout2.setObjectName(_fromUtf8("horizontal_layout2"))
@@ -72,6 +71,11 @@ class Ui_FrameVerRegistros(object):
         self.select_ano = QtGui.QComboBox(self.horizontalLayoutWidget_2)
         self.select_ano.setObjectName(_fromUtf8("select_ano"))
         self.horizontal_layout2.addWidget(self.select_ano)
+        spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Minimum)
+        self.horizontal_layout2.addItem(spacerItem1)
+        self.btn_buscar = QtGui.QPushButton(self.horizontalLayoutWidget_2)
+        self.btn_buscar.setObjectName(_fromUtf8("btn_buscar"))
+        self.horizontal_layout2.addWidget(self.btn_buscar)
 
         self.retranslateUi(FrameVerRegistros)
         QtCore.QMetaObject.connectSlotsByName(FrameVerRegistros)
@@ -81,3 +85,4 @@ class Ui_FrameVerRegistros(object):
         self.label_2.setText(_translate("FrameVerRegistros", "Escribar el nombre del empleado que desa buscar:", None))
         self.label_parametros.setText(_translate("FrameVerRegistros", "Parametros de Busqueda", None))
         self.label_fecha.setText(_translate("FrameVerRegistros", "Buscar por fecha:", None))
+        self.btn_buscar.setText(_translate("FrameVerRegistros", "Buscar", None))

@@ -78,7 +78,7 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QTableView" name="tabla_resultados"/>
+     <widget class="QTableWidget" name="tabla_resultados"/>
     </item>
    </layout>
   </widget>
@@ -86,9 +86,9 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>90</y>
-     <width>421</width>
-     <height>31</height>
+     <y>80</y>
+     <width>521</width>
+     <height>51</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontal_layout2">
@@ -107,6 +107,29 @@
     </item>
     <item>
      <widget class="QComboBox" name="select_ano"/>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btn_buscar">
+      <property name="text">
+       <string>Buscar</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
