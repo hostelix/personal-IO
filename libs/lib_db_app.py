@@ -130,6 +130,80 @@ class PersonalIOdb:
         else:
             return self.cursor.fetchone()
 
+    def obtener_asistencia(self):
+        try:
+            self.cursor.execute("""
+            SELECT
+            personal.cedula,
+            personal.primer_nombre,
+            personal.primer_apellido,
+            cargos.descripcion,
+            entradas_salidas.hora_entrada,
+            entradas_salidas.hora_salida,
+            entradas_salidas.fecha
+            FROM entradas_salidas
+            INNER JOIN personal ON personal.cedula = entradas_salidas.cedula
+            INNER JOIN cargos ON personal.id_cargo = cargos.id; """)
+
+        except dblite.Error as err:
+            if self.conexion:
+                self.conexion.rollback()
+
+            print("Error %s:" % err.args[0])
+
+        else:
+            return self.cursor.fetchall()
+
+    def obtener_busqueda_asistencia(self, param):
+        param = dict(param)
+
+        consulta_total = '1'
+
+        if param.get('nombre_empleado', None):
+            consulta_nombre = " AND primer_nombre LIKE '%{0}%' ".format(param.get('nombre_empleado'))
+            consulta_total += consulta_nombre
+
+        if param.get('dia', None):
+            consulta_tmp = " AND strftime('%d',fecha) = '{0}'".format(param.get('dia'))
+            consulta_total += consulta_tmp
+
+        if param.get('mes', None):
+            mes_tmp = param.get('mes')
+
+            if int(mes_tmp) > 0 and int(mes_tmp) < 10:
+                mes_tmp = "0%s" % mes_tmp
+
+            consulta_tmp = " AND strftime('%m',fecha) = '{0}'".format(mes_tmp)
+            consulta_total += consulta_tmp
+
+        if param.get('ano', None):
+            consulta_tmp = " AND strftime('%Y',fecha) = '{0}'".format(param.get('ano'))
+            consulta_total += consulta_tmp
+
+        try:
+            self.cursor.execute("""
+            SELECT
+            personal.cedula,
+            personal.primer_nombre,
+            personal.primer_apellido,
+            cargos.descripcion,
+            entradas_salidas.hora_entrada,
+            entradas_salidas.hora_salida,
+            entradas_salidas.fecha
+            FROM entradas_salidas
+            INNER JOIN personal ON personal.cedula = entradas_salidas.cedula
+            INNER JOIN cargos ON personal.id_cargo = cargos.id
+            WHERE %s; """ % consulta_total)
+
+        except dblite.Error as err:
+            if self.conexion:
+                self.conexion.rollback()
+
+            print("Error %s:" % err.args[0])
+
+        else:
+            return self.cursor.fetchall()
+
     def proceso_entrada_salida(self, datos):
         datos['fecha'] = obtener_fecha('YYYY-MM-DD')
 
