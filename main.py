@@ -5,6 +5,7 @@ from interfaces.dialogo_registro_datos import *
 from interfaces.pantalla_principal import *
 from interfaces.dialogo_registro_administrador import *
 from interfaces.dialogo_verificar_cedula import *
+from interfaces.frame_ver_registros import *
 from libs.lib_db_app import PersonalIOdb
 from libs.lib_extras import *
 from libs.paths import *
@@ -32,7 +33,8 @@ class VentanaPrincipal(QtGui.QMainWindow):
                                self.abrir_dialogo_registro_administrador)
         QtCore.QObject.connect(self.ui.action_verificacion_cedula, QtCore.SIGNAL("triggered()"),
                                self.abrir_dialogo_verificacion_cedula)
-
+        QtCore.QObject.connect(self.ui.action_ver_registros_asistencia, QtCore.SIGNAL("triggered()"),
+                               self.cargar_frame_ver_registros_asistencia)
 
     def salir_app(self):
         if confirmar_salida_app(self):
@@ -50,12 +52,99 @@ class VentanaPrincipal(QtGui.QMainWindow):
     def abrir_dialogo_verificacion_cedula(self):
         DialogoVerificarCedula(self.personal_io_db).exec_()
 
+    def cargar_frame_ver_registros_asistencia(self):
+        frame_registros_asistencia = FrameVerRegistros(self.personal_io_db)
+
+        self.setCentralWidget(frame_registros_asistencia)
+
     def centrar_ventana(self):
         frameGm = self.frameGeometry()
         screen = QtGui.QApplication.desktop().screenNumber(QtGui.QApplication.desktop().cursor().pos())
         centerPoint = QtGui.QApplication.desktop().screenGeometry(screen).center()
         frameGm.moveCenter(centerPoint)
         self.move(frameGm.topLeft())
+
+
+class FrameVerRegistros(QtGui.QWidget):
+    def __init__(self, base_de_datos, parent=None):
+        QtGui.QWidget.__init__(self, parent)
+        self.ui = Ui_FrameVerRegistros()
+        self.ui.setupUi(self)
+
+        self.personal_io_db = base_de_datos
+
+        self.ui.select_dia.addItems([''] + ['%d' % dia for dia in range(1, 32)])
+        self.ui.select_mes.addItems(('', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto',
+                                     'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'))
+        self.ui.select_ano.addItems([''] + ['%d' % dia for dia in range(2000, 2030)])
+
+        self.cargar_header_tabla()
+        self.cargar_datos_tabla(self.personal_io_db.obtener_asistencia())
+
+        self.ui.tabla_resultados.resizeColumnsToContents()
+
+        QtCore.QObject.connect(self.ui.btn_buscar, QtCore.SIGNAL("clicked()"),
+                               self.cargar_datos_busqueda)
+
+    def cargar_header_tabla(self):
+        cabeceras = ['Nombre Completo', 'Cedula', 'Cargo', 'Hora entrada', 'Hora Salida', 'Fecha']
+
+        # Seteamos el numero de columnas que tendra la tabla
+        self.ui.tabla_resultados.setColumnCount(len(cabeceras))
+
+        for n, elem in enumerate(cabeceras):
+            self.ui.tabla_resultados.setHorizontalHeaderItem(n, QtGui.QTableWidgetItem(elem))
+
+    def cargar_datos_tabla(self, _datos):
+        datos = _datos
+
+        # Seteamos el numero de filas que obtengamos de la db
+        self.ui.tabla_resultados.setRowCount(len(datos))
+
+        for num_fila, fila in enumerate(datos):
+            nombre_completo = fila[1].capitalize() + ' ' + fila[2].capitalize()
+            fecha = fila[6].split('-')
+            fecha = "{0}/{1}/{2}".format(fecha[2], fecha[1], fecha[0])
+
+            self.ui.tabla_resultados.setItem(num_fila, 0, QtGui.QTableWidgetItem(nombre_completo))
+            self.ui.tabla_resultados.setItem(num_fila, 1, QtGui.QTableWidgetItem(fila[0]))
+            self.ui.tabla_resultados.setItem(num_fila, 2, QtGui.QTableWidgetItem(fila[3]))
+            self.ui.tabla_resultados.setItem(num_fila, 3, QtGui.QTableWidgetItem(fila[4]))
+            self.ui.tabla_resultados.setItem(num_fila, 4, QtGui.QTableWidgetItem(fila[5]))
+            self.ui.tabla_resultados.setItem(num_fila, 5, QtGui.QTableWidgetItem(fecha))
+
+    def cargar_datos_busqueda(self):
+        fecha_busqueda = {
+            'dia': str(self.ui.select_dia.currentText()),
+            'mes': str(self.ui.select_mes.currentIndex()),
+            'ano': str(self.ui.select_ano.currentText()),
+        }
+
+        pista_buscar = str(self.ui.input_busqueda.text())
+
+        parametros = {}
+
+        if len(pista_buscar.strip()) != 0:
+            parametros['nombre_empleado'] = pista_buscar
+
+        if len(fecha_busqueda['dia'].strip()) != 0:
+            parametros['dia'] = fecha_busqueda['dia']
+
+        if fecha_busqueda['mes'].strip() != '0':
+            parametros['mes'] = fecha_busqueda['mes']
+
+        if len(fecha_busqueda['ano'].strip()) != 0:
+            parametros['ano'] = fecha_busqueda['ano']
+
+        datos = self.personal_io_db.obtener_busqueda_asistencia(parametros)
+
+        self.ui.tabla_resultados.clear()
+        self.cargar_header_tabla()
+        self.cargar_datos_tabla(datos)
+
+        self.ui.tabla_resultados.resizeColumnsToContents()
+
+
 
 
 class DialogoRegistroDatos(QtGui.QDialog):
