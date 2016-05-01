@@ -36,6 +36,8 @@ class VentanaPrincipal(QtGui.QMainWindow):
         QtCore.QObject.connect(self.ui.action_ver_registros_asistencia, QtCore.SIGNAL("triggered()"),
                                self.cargar_frame_ver_registros_asistencia)
 
+        self.setCentralWidget(FrameImagenPrincipal(self))
+
     def salir_app(self):
         if confirmar_salida_app(self):
             self.personal_io_db.cerrar()
@@ -58,12 +60,25 @@ class VentanaPrincipal(QtGui.QMainWindow):
 
             self.setCentralWidget(frame_registros_asistencia)
 
+
     def centrar_ventana(self):
         frameGm = self.frameGeometry()
         screen = QtGui.QApplication.desktop().screenNumber(QtGui.QApplication.desktop().cursor().pos())
         centerPoint = QtGui.QApplication.desktop().screenGeometry(screen).center()
         frameGm.moveCenter(centerPoint)
         self.move(frameGm.topLeft())
+
+
+class FrameImagenPrincipal(QtGui.QWidget):
+    def __init__(self, parent):
+        super(FrameImagenPrincipal, self).__init__(parent)
+
+        contenedor_img = QtGui.QLabel(self)
+        contenedor_img.setGeometry(250, 1, 380, 400)
+        pixmap = QtGui.QPixmap('/home/hostelix/Escritorio/logo_simon_bolivar.png')
+        pixmap = pixmap.scaledToHeight(160)
+        pixmap = pixmap.scaledToWidth(160)
+        contenedor_img.setPixmap(pixmap)
 
 
 class FrameVerRegistros(QtGui.QWidget):
@@ -108,11 +123,13 @@ class FrameVerRegistros(QtGui.QWidget):
             fecha = "{0}/{1}/{2}".format(fecha[2], fecha[1], fecha[0])
 
             self.ui.tabla_resultados.setItem(num_fila, 0, QtGui.QTableWidgetItem(nombre_completo))
-            self.ui.tabla_resultados.setItem(num_fila, 1, QtGui.QTableWidgetItem(fila[0]))
-            self.ui.tabla_resultados.setItem(num_fila, 2, QtGui.QTableWidgetItem(fila[3]))
-            self.ui.tabla_resultados.setItem(num_fila, 3, QtGui.QTableWidgetItem(fila[4]))
-            self.ui.tabla_resultados.setItem(num_fila, 4, QtGui.QTableWidgetItem(fila[5]))
-            self.ui.tabla_resultados.setItem(num_fila, 5, QtGui.QTableWidgetItem(fecha))
+            self.ui.tabla_resultados.setItem(num_fila, 1,
+                                             QtGui.QTableWidgetItem(fila[0] if fila[0] else "No Especificado"))
+            self.ui.tabla_resultados.setItem(num_fila, 2,
+                                             QtGui.QTableWidgetItem(fila[3] if fila[3] else "No Especificado"))
+            self.ui.tabla_resultados.setItem(num_fila, 3, QtGui.QTableWidgetItem(fila[4] if fila[4] else "Sin Entrada"))
+            self.ui.tabla_resultados.setItem(num_fila, 4, QtGui.QTableWidgetItem(fila[5] if fila[5] else "Sin Salida"))
+            self.ui.tabla_resultados.setItem(num_fila, 5, QtGui.QTableWidgetItem(fecha if fecha else "No Especificado"))
 
     def cargar_datos_busqueda(self):
         fecha_busqueda = {
@@ -144,8 +161,6 @@ class FrameVerRegistros(QtGui.QWidget):
         self.cargar_datos_tabla(datos)
 
         self.ui.tabla_resultados.resizeColumnsToContents()
-
-
 
 
 class DialogoRegistroDatos(QtGui.QDialog):
