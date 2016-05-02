@@ -103,5 +103,5 @@ class DialogoVerificarUsuario(QtGui.QDialog):
             self.close()
             return True
         else:
-            print ("Acceso denegado")
+            QtGui.QMessageBox.information(self, "Atencion!", "Usuario o Contrasena invalidos")
             return False
