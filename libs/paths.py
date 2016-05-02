@@ -32,3 +32,5 @@ PATH_ICON_APP_16X16 = path.join(CARPETA_ICONOS, 'personal_io_16x16.png')
 PATH_ICON_APP_32X32 = path.join(CARPETA_ICONOS, 'personal_io_32x32.png')
 PATH_ICON_APP_64X64 = path.join(CARPETA_ICONOS, 'personal_io_64x64.png')
 PATH_ICON_APP_128X128 = path.join(CARPETA_ICONOS, 'personal_io_128x128.png')
+
+PATH_ICON_APP = path.join(CARPETA_RECURSOS, 'logo_app.png')
