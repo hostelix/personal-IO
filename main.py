@@ -1,6 +1,6 @@
 #! /usr/bin/python
 import sys
-
+import os
 from interfaces.dialogo_registro_datos import *
 from interfaces.pantalla_principal import *
 from interfaces.dialogo_registro_administrador import *
@@ -17,13 +17,19 @@ class VentanaPrincipal(QtGui.QMainWindow):
         self.ui = Ui_VentanaPrincipal()
         self.ui.setupUi(self)
 
-        # Variable para manejar la base de datos
-        self.personal_io_db = PersonalIOdb()
+        if not os.path.exists(PATH_CARPETA_APP):
+            os.mkdir(PATH_CARPETA_APP)
+
+            self.personal_io_db = PersonalIOdb()
+            self.personal_io_db.crear_tablas()
+
+            QtGui.QMessageBox.information(self, "Atencion!", "Carpeta de configuracion creada con exito")
+        else:
+            self.personal_io_db = PersonalIOdb()
 
         # Seteamos el icono de la aplicacion
         setear_icono_app(self)
 
-        # self.personal_io_db.crear_tablas()
 
         # Conexion de acciones con las senales
         QtCore.QObject.connect(self.ui.action_salir, QtCore.SIGNAL("triggered()"), self.salir_app)
@@ -37,6 +43,7 @@ class VentanaPrincipal(QtGui.QMainWindow):
                                self.cargar_frame_ver_registros_asistencia)
 
         self.setCentralWidget(FrameImagenPrincipal(self))
+
 
     def salir_app(self):
         if confirmar_salida_app(self):
@@ -74,10 +81,10 @@ class FrameImagenPrincipal(QtGui.QWidget):
         super(FrameImagenPrincipal, self).__init__(parent)
 
         contenedor_img = QtGui.QLabel(self)
-        contenedor_img.setGeometry(250, 1, 380, 400)
-        pixmap = QtGui.QPixmap('/home/hostelix/Escritorio/logo_simon_bolivar.png')
-        pixmap = pixmap.scaledToHeight(160)
-        pixmap = pixmap.scaledToWidth(160)
+        contenedor_img.setGeometry(40, 1, 600, 400)
+        pixmap = QtGui.QPixmap(PATH_ICON_APP)
+        pixmap = pixmap.scaledToHeight(590)
+        pixmap = pixmap.scaledToWidth(590)
         contenedor_img.setPixmap(pixmap)
 
 
