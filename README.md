@@ -59,7 +59,7 @@ $ DIST=jessie ARCH=i386 git-pbuilder create
 Root the project:
 
 ```bash
-$ cd gescolar-estadistico-deb/ 
+$ cd personal-IO/ 
 ``` 
 
 Execute in the root of the project:
