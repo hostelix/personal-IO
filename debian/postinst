@@ -1,0 +1,59 @@
+#!/bin/bash -e
+#
+# ==============================================================================
+# PAQUETE: personal-IO
+# ARCHIVO: postinst
+# DESCRIPCIÓN: Configura el sistema despues la instalación del paquete.
+# COPYRIGHT:
+#  (C) 2016 Israel Lugo  <hostelixisrael@gmail.com>
+# LICENCIA: GPL3
+# ==============================================================================
+#
+# Este programa es software libre. Puede redistribuirlo y/o modificarlo bajo los
+# términos de la Licencia Pública General de GNU (versión 3).
+
+case ${1} in
+
+    configure)
+
+	UHOME="/home"
+	USERS=$(cut -d':' -f 1 /etc/passwd)
+
+	echo "Validando usuarios"
+	for u in $USERS; do
+	    
+	    ID=$(id -u $u)
+	    
+	    if [ $ID -ge 1000 ] ; then
+		
+			echo "$ID entro a la validacion"
+		
+			if [ -d ${UHOME}/${u} ] ; then
+		
+				cp /usr/share/applications/personal-IO.desktop ${UHOME}/${u}/Escritorio/
+
+	        fi
+	    fi
+
+	done
+
+	chmod +x /usr/share/applications/personal-IO.desktop
+
+    ;;
+
+        abort-upgrade|abort-remove|abort-deconfigure)
+
+        ;;
+
+        *)
+
+                echo "postinst no reconoce el argumento '"${1}"'" >&2
+                exit 1
+
+        ;;
+
+esac
+
+#DEBHELPER#
+
+exit 0

@@ -1,0 +1,4 @@
+include README.md
+recursive-include personal-IO *
+recursive-exclude debian *
+recursive-exclude usr *

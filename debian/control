@@ -1,0 +1,14 @@
+Source: personal-io
+Section: desktop
+Priority: standard
+Maintainer: Victor Pino <victopin0@gmail.com>
+Build-Depends: debhelper (>= 9.20150101), dh-virtualenv (>= 0.7), python-setuptools, libpq-dev, python-all-dev
+
+Package: personal-io
+Architecture: any
+Pre-Depends: dpkg (>= 1.16.1), python2.7 | python3.4
+Depends: python-qt4,
+		 qt4-dev-tools,
+		 ${misc:Depends}
+Description: Control del personal
+ Aplicacion para el control de entrada y salida de personal

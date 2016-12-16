@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Personal-IO
+Exec=python /usr/share/python/personal-io/lib/python2.7/site-packages/personal-IO/main.py
+Comment=Control de Acceso
+Icon=personal-io
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=Application;System;Settings;
+StartupNotify=false
