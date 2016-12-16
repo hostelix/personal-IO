@@ -1,0 +1,51 @@
+.QUETE: personal-IO
+# ARCHIVO: postrm
+# DESCRIPCIÓN: Revierte los cambios hechos por el paquete en los scripts del
+#              mantenedor, de forma tal de asegurarse que el sistema quede
+#              como estaba antes de su instalación.
+# COPYRIGHT:
+#  (C) 2016 Israel Lugo <hostelixisrael@gmail.com>
+# LICENCIA: MIT
+# ==============================================================================
+#
+# Este programa es software libre. Puede redistribuirlo y/o modificarlo bajo los
+# términos de la Licencia Pública General de GNU (versión 3).
+
+case "$1" in
+    remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
+    		UHOME="/home"
+	USERS=$(cut -d':' -f 1 /etc/passwd)
+
+	echo "Validando usuarios"
+	for u in $USERS; do
+	    
+	    ID=$(id -u $u)
+	    
+	    if [ $ID -ge 1000 ] ; then
+		
+			echo "$ID entro a la validacion"
+		
+			if [ -d ${UHOME}/${u} ] ; then
+				rm -f ${UHOME}/${u}/Escritorio/personal-IO.desktop
+
+		        fi
+	    fi
+
+	done 
+    ;;
+
+    purge)
+
+    ;;
+
+    *)
+        echo "postrm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+
+
+#DEBHELPER#
+
+exit 0
