@@ -10,6 +10,7 @@
 1.0.0
 
 
+- Guide by Vpino
 
 # Build .deb
 
