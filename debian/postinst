@@ -31,6 +31,7 @@ case ${1} in
 			if [ -d ${UHOME}/${u} ] ; then
 		
 				cp /usr/share/applications/personal-IO.desktop ${UHOME}/${u}/Escritorio/
+				chmod +x ${UHOME}/${u}/Escritorio/personal-IO.desktop
 
 	        fi
 	    fi
